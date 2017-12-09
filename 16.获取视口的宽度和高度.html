@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取视口的宽度和高度</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function getViewportSize() {
+        return {
+            width: window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+            height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+        };
+    }
+    console.log(getViewportSize());
+    console.log(document.documentElement.clientHeight);
+    console.log(document.body.clientHeight);
+</script>
+</body>
+</html>s
