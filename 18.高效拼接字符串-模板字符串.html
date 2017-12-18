@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>18.高效拼接字符串-模板字符串</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // https://segmentfault.com/a/1190000003092875
+    // http://www.jb51.net/article/79311.htm
+
+    // 需求
+    // (1)"aaa{$name}{$sex}aa"
+    var str1 = "aaa{$name}{$sex}a{$age}a";
+    var reg = /{(\$.+)}/g;
+    console.log(str1.match(reg));
+
+
+    // (2)"aaa{ $name}aa"
+    // (3)"aaa{$name }aa"
+    // (4)"aaa{ $name }aa"
+
+
+    // (4)"aaa{ $name }aa"
+
+
+</script>
+</body>
+</html>
