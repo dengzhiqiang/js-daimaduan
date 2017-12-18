@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19.复制一个对象json复制</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // 遍历对象 复制对象
+    var obj = {
+        name: 'JSON',
+        age: '18',
+        setAge: function (age) {
+            this.age = age;
+        },
+        sex: {
+            setSex: function () {
+
+            },
+            getSex: function () {
+
+            }
+        }
+    };
+
+//    将对象序列化再解析回来，对象中如果有函数function则不能正确复制
+    var cloneObj = JSON.parse(JSON.stringify(obj));
+    console.log(cloneObj);
+
+
+</script>
+</body>
+</html>

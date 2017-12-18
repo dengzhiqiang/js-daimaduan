@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>19.复制一个对象</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // 遍历对象 复制对象
+    var obj = {
+        name: 'for in',
+        age: '18',
+        setAge: function (age) {
+            this.age = age;
+        },
+        sex: {
+            setSex: function () {
+
+            },
+            getSex: function () {
+
+            }
+        }
+    };
+
+    var cloneObj = function (obj) {
+        var o = {};
+        for (var key in obj) {
+            if (typeof key === 'object') {
+                o[key] = cloneObj(key);
+            } else {
+                o[key] = obj[key];
+            }
+        }
+        return o;
+    };
+
+    console.dir(cloneObj(obj));
+
+</script>
+</body>
+</html>

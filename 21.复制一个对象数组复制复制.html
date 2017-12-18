@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>21.复制一个对象数组复制复制</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // 数组对象的复制
+    var age = [10, 20, 30];
+    var newAge = age.concat('aa');
+    age.push('新添加的！');
+
+    console.log(newAge);
+    console.log(age);
+
+</script>
+</body>
+</html>
