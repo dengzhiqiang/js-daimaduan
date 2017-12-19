@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>22.$.extend源码解读-使用则递归合并或者叫深度拷贝</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script src="lib/jquery2.2.4.js"></script>
+<script>
+    // 给jQuery对象添加属性或者方法
+    var obj1 = {name: 'Tom', love: {drink: 'milk', eat: 'bread'}};
+    var obj2 = {name: 'Jack', love: {drink: 'water', sport: 'football'}};
+
+    console.log(($.extend(false, obj1, obj2)).love);
+    //Object {drink: "water", sport: "football"}
+
+
+    console.log(($.extend(true, obj1, obj2)).love);
+    //Object {drink: "water", eat: "bread", sport: "football"}
+
+    // false 表示浅拷贝：浅拷贝就是不会递归到对象内部把方法对象拷贝替换，而是直接拷贝替换
+
+</script>
+</body>
+</html>

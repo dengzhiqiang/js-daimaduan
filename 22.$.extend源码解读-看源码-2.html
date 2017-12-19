@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>22.$.extend源码解读-看源码-2</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /**
+     * 为了方便，下面的程序解读用这个实例
+     *  var obj1={name:'Tom',love:{drink:'milk',eat:'bread'},getName:function(){}};
+     *  var obj2={name:'Jack',love:{drink:'water',sport:'football'}};
+     *  $.extend(true,obj1,obj2) 深度拷贝举例
+     * @returns {*|{}}
+     */
+
+    // 不考虑深度复制，简单的复制对象
+    function extend() {
+        // 首先获取第一个参数 这里是true
+        var target = arguments[0] || {};
+        var length = arguments.length;
+        var i = 1; // 这里设置1 可以保证下面要使用的时候，都获取的是第二个参数
+
+
+        // 如果第一个参数是boolean值，则代表是深度复制或者不是深度复制
+        if (typeof target === 'boolean') {
+            // deep:true 为深度复制
+            // deep:false 为浅复制
+            var deep = target;
+
+            // 这个时候要处理的参数是第二个，也就是obj1
+
+
+            // target变成了obj1
+            target = arguments[i] || {};
+            i++;
+        }
+
+        // 如果此时target不是一个对象，则没有复制的必要，直接返回空对象
+        if (typeof target !== 'object') {
+            //
+            return {};
+        }
+
+        // 复制对象
+        for (; i < length; i++) {
+            // 如果有第三个参数，或者其他参数
+            if ((options = arguments[i]) != null) {
+                for (var name in options) {
+                    target[name] = options[name];
+                }
+            }
+        }
+
+        return target;
+    }
+
+    var obj1 = {
+        name: 'Tom', love: {drink: 'milk', eat: 'bread'}, getName: function () {
+        }
+    };
+    var obj2 = {name: 'Jack', love: {drink: 'water', sport: 'football'}};
+
+    var obj3 = {
+        name: '王', getSex: function () {
+        }
+    };
+    console.log(extend(true, obj1, obj2));
+
+
+    // 其实就是把obj2,obj3的属性全部放到obj1的上面
+    console.log(extend(true, obj1, obj2, obj3));
+
+
+</script>
+</body>
+</html>

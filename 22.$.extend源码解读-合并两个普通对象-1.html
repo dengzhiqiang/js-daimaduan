@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>22.$.extend源码解读</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<script src="lib/jquery2.2.4.js"></script>
+<script>
+    // 合并两个普通对象
+    //给两个普通对象合并属性
+    // 但是此时obj1被修改了
+    var obj1 = {name: 'Tom', age: 22};
+    var obj2 = {name: 'Jack', height: 180};
+    console.log($.extend(obj1, obj2));  //Object {name: "Jack", age: 22, height: 180}
+    console.log(obj1);//Object {name: "Jack", age: 22, height: 180}
+
+    // 默认情况下，待合并对象跟返回结果一样是被修改了的，
+    // 如果仅仅想得到一个合并后的对象又不想破坏任何一个原来的对象可以使用此方法
+
+    console.log($.extend({}, obj1, obj2));// 就是第一个参数为空对象即可 其实就是把obj2,obj3的属性全部放到{}的上面
+</script>
+</body>
+</html>
