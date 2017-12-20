@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25.js获取属性和方法-特权方法-4</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function Person(name) {
+        // 公有属性和方法
+        var name = name;
+
+
+        // 特权方法 ，调用私有的属性和方法
+        this.getName = function () {
+            // 私有的属性和方法，不能使用this
+            console.log(name);
+        };
+    }
+
+
+    var p1 = new Person('邓志强');
+
+    p1.getName();
+
+
+</script>
+</body>
+</html>

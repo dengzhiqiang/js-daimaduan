@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25.js获取属性和方法-公有属性和方法.html</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function Person(name, age) {
+        // 公有属性和方法
+        this.name = name;
+
+        this.getName = function () {
+            console.log(this.age);
+        }
+    }
+
+    // 在原型上的，公有有属性和方法
+    Person.prototype.age = function () {
+
+    };
+    Person.prototype.setName = function () {
+        this.name = name;
+    };
+
+    var p1 = new Person('邓志强');
+
+
+    for (var key in p1) {
+        // 输出原型上的和对象上的属性
+        console.log(key);
+    }
+
+    console.log('============分割线！==============');
+
+    for (var key in p1) {
+        // 输出对象上的属性，不包括原型上的属性
+        if (p1.hasOwnProperty(key)) {
+            console.log(key);
+        }
+    }
+
+</script>
+</body>
+</html>

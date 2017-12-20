@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25.js获取属性和方法-公有方法的调用规则-5</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function Person(name) {
+        // 公有属性和方法
+        this.name = name;
+
+
+        this.getName = function () {
+            console.log(this.name);
+        };
+    }
+
+    Person.eat = function () {
+        console.log('吃');
+    };
+
+    Person.prototype.consolePersonEat = function () {
+        Person.eat();
+    };
+
+
+    var p1 = new Person('邓志强');
+
+    // 吃
+    p1.consolePersonEat();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25.js获取属性和方法-静态属性和方法-3</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function Person(name) {
+        // 公有属性和方法
+        this.name = name;
+
+        this.getName = function () {
+            console.log(this.age);
+        };
+    }
+
+    //    无需实例化就可以调用的方法就叫静态方法，无需实例化就可调用对象的方法和属性。
+    Person.personName = '静态属性';
+
+
+    var p1 = new Person('邓志强');
+
+
+    for (var key in p1) {
+        // 输出原型上的和对象上的属性
+        console.log(key);
+    }
+
+
+</script>
+</body>
+</html>

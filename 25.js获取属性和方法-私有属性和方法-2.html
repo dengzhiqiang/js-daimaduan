@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25.js获取属性和方法-私有属性和方法-2</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function Person(name) {
+        // 公有属性和方法
+        this.name = name;
+
+        this.getName = function () {
+            console.log(this.age);
+        };
+
+        // 私有属性和方法,下面的这两个属性无法遍历
+        var _age = 10;
+        var _getAge = function () {
+            console.log(age);
+        }
+    }
+
+
+    var p1 = new Person('邓志强');
+
+
+    for (var key in p1) {
+        // 输出原型上的和对象上的属性
+        console.log(key);
+    }
+
+
+</script>
+</body>
+</html>
