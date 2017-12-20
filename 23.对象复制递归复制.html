@@ -22,24 +22,62 @@
      * @returns {*|{}}
      */
     function extendDeep(parent, child) {
-        child = child || {};
-        for (var i in parent) {
-            if (parent.hasOwnProperty(i)) {
-                //检测当前属性是否为对象
-                if (typeof parent[i] === "object") {
-                    // 如果当前属性为对象，还要检测它是否为数组
-                    // 这是因为数组的字面量表示和对象的字面量表示不同
-                    // 前者是[],而后者是{}
-                    child[i] = (Object.prototype.toString.call(parent[i]) === "[object Array]") ? [] : {};
-                    // 递归调用extend
-                    extendDeep(parent[i], child[i]);
+        for (var key in child) {
+            // 只复制自己的属性，不复制继承过来的属性
+            if (child.hasOwnProperty(key)) {
+                if (Object.prototype.toString.call(child[key]) === '[object Object]') {
+                    // 如果要合并过来的对象中，有的属性，但是在前面的对象中没有，也要合并过来
+                    parent[key] = extendDeep(parent[key], child[key]);
                 } else {
-                    child[i] = parent[i];
+                    parent[key] = child[key];
                 }
             }
         }
-        return child;
+        return parent;
     }
+
+
+    var parent = {
+        name: 'parent',
+        sex: {
+            setSex: function () {
+                console.log('parent-setSex');
+            },
+            getSex: function () {
+                console.log('parent-getSex');
+            },
+            parentSex: {
+                setSex: function () {
+                    console.log('parent-setSex');
+                },
+                getSex: function () {
+                    console.log('parent-getSex');
+                },
+            }
+        }
+    };
+
+    var child = {
+        name: 'child',
+        sex: {
+            setSex: function () {
+                console.log('child-setSex');
+            },
+            getSex: function () {
+                console.log('child-getSex');
+            },
+            sexsex: function () {
+
+            }
+        },
+        age: function () {
+
+        }
+    };
+
+    var extendParent = extendDeep(parent, child);
+    console.log(extendParent);
+    extendParent.sex.setSex();
 </script>
 </body>
 </html>
