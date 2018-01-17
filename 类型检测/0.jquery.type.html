@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0.jquery.type</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // https://www.cnblogs.com/guoyansi19900907/p/3794810.html 简答
+    /*    var obj = {
+            type: function (obj) {
+                // undefined + '' =  undefined
+                // null + '' = null
+                if (obj == null) {
+                    return obj + "";
+                }
+                // Support: Android<4.0, iOS<6 (functionish RegExp)
+                return typeof obj === "object" || typeof obj === "function" ?
+                    class2type[toString.call(obj)] || "object" :
+                    typeof obj;
+            }
+        };*/
+
+    // Populate the class2type map
+    /*    jQuery.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function (i, name) {
+            class2type["[object " + name + "]"] = name.toLowerCase();
+        });*/
+
+    /**
+     * 构造class2type  类型转换
+     * @type {[string,string,string,string,string,string,string,string,string]}
+     */
+        //    {
+        //        "[object Array]":"array",
+        //        "[object Boolean]":"boolean",
+        //        "[object Date]":"date",
+        //        "[object Function]":"function",
+        //        "[object Number]":"number",
+        //        "[object Object]":"object",
+        //        "[object RegExp]":"regexp",
+        //        "[object String]":"string"
+        //    }
+    var class2type = {};
+    var toString = class2type.toString;
+    var list = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object', 'Error'];
+    for (var i = 0, len = list.length; i < len; i++) {
+        class2type["[object " + list[i] + "]"] = list[i].toLowerCase();
+    }
+
+    var jiance = {
+        type: function (mix) {
+            // undefined == null ==> true
+            // undefined + '' =  undefined
+            // null + '' = null
+            if (mix == null) return mix + '';
+            // type参数不是null,则先判断class2Type中是否有相应的成员,如果存在着返回成员值,否则返回object
+            return typeof mix === 'object' || typeof  mix === 'function'
+                ? class2type[toString.call(mix)] || 'object '
+                : typeof mix;
+        }
+    };
+
+
+    console.log("jiance.type('ok')", jiance.type('ok'));
+    console.log("jiance.type('1')", jiance.type('1'));
+    console.log("jiance.type(1)", jiance.type(1));
+    console.log("jiance.type(null)", jiance.type(null));
+    console.log("jiance.type(function(){})", jiance.type(function () {
+    }));
+    console.log("jiance.type(new String())", jiance.type(new String()));
+    console.log("jiance.type(new Boolean())", jiance.type(new Boolean()));
+    console.log("jiance.type({})", jiance.type({}));
+    console.log("jiance.type()", jiance.type());
+    console.log("jiance.type(a)", jiance.type(a));
+
+
+</script>
+</body>
+</html>

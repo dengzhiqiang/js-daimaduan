@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>27.类型检测isArray</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    (function () {
+
+        var class2type = {};
+        var toString = class2type.toString;
+        var list = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object', 'Error'];
+        for (var i = 0, len = list.length; i < len; i++) {
+            class2type["[object " + list[i] + "]"] = list[i].toLowerCase();
+        }
+
+        var jQuery = {
+            type: function (mix) {
+                // undefined == null ==> true
+                // undefined + '' =  undefined
+                // null + '' = null
+                if (mix == null) return mix + '';
+                // type参数不是null,则先判断class2Type中是否有相应的成员,如果存在着返回成员值,否则返回object
+                return typeof mix === 'object' || typeof  mix === 'function'
+                    ? class2type[toString.call(mix)] || 'object '
+                    : typeof mix;
+            }
+        };
+        window.$ = jQuery;
+    })();
+    /**
+     * jquery的isArray
+     * @type {*|Function}
+     */
+    var isArray = Array.isArray || function (obj) {
+        return $.type(obj) === "array";
+    };
+
+    console.log(isArray([]));
+    console.log(isArray(new Array()));
+
+
+    //    instanceof 和constructor 判断的变量，必须在当前页面声明的，比如，一个页面（父页面）有一个框架，框架中引用了一个页面（子页面），在子页面中声明了一个ary，并将其赋值给父页面的一个变量，这时判断该变量，Array == object.constructor;会返回false；
+    var isArray2 = Array.isArray ||
+        function (object) {
+            //  所以不推荐用下面的这种方式
+            return object instanceof Array;
+        };
+
+</script>
+</body>
+</html>
