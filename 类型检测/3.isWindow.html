@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3.isWindow</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+<script>
+    // 判断是否是window对象
+    var isWindow = function (obj) {
+        // 如果传入的是undefined 或者null或报错
+        // window对象上面有一个window对象
+        return obj != null && obj == obj.window;
+    }
+
+</script>
+
+
+</body>
+</html>

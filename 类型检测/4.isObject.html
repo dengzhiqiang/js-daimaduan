@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.isObject</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+<script>
+    var class2type = {};
+    var toString = class2type.toString;
+    var list = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object', 'Error'];
+    for (var i = 0, len = list.length; i < len; i++) {
+        class2type["[object " + list[i] + "]"] = list[i].toLowerCase();
+    }
+
+    var jiance = {
+        type: function (mix) {
+            // undefined == null ==> true
+            // undefined + '' =  undefined
+            // null + '' = null
+            if (mix == null) return mix + '';
+            // type参数不是null,则先判断class2Type中是否有相应的成员,如果存在着返回成员值,否则返回object
+            return typeof mix === 'object' || typeof  mix === 'function'
+                ? class2type[toString.call(mix)] || 'object '
+                : typeof mix;
+        }
+    };
+
+
+    // 判断是否是window对象
+    var isObject = function (obj) {
+        return $.type(obj) === 'object';
+    }
+
+</script>
+
+
+</body>
+</html>

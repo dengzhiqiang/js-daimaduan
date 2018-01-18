@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.isArrayLike类数组</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+<script>
+    // 由于isArrayLike是私有函数，所以暂时先放到外面来使用
+    $.extend({
+        isArrayLike: function (obj) {
+            var length = !!obj && "length" in obj && obj.length,
+                type = jQuery.type(obj);
+
+            if (type === "function" || jQuery.isWindow(obj)) {
+                return false;
+            }
+
+            return type === "array" || length === 0 ||
+                typeof length === "number" && length > 0 && ( length - 1 ) in obj;
+        }
+    });
+
+
+</script>
+<div id="div1">
+    <input type="text" id="input1"/>
+    <input type="text" class="input1"/>
+    <input type="text" class="input1"/>
+</div>
+
+
+<script>
+    //测试jquery对象，length直接为number
+    console.log("jquery对象:" + $.isArrayLike($("input")));
+    console.log("length" in $("input") && $("input").length);
+    console.log("结果是：" + document.getElementById("div1").nodeType); //返回1，元素为1，属性为2，文本是3，document是9，documentFragment是11
+</script>
+
+</body>
+</html>

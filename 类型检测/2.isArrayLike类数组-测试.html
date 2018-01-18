@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.isArrayLike类数组</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+<script>
+    // 由于isArrayLike是私有函数，所以暂时先放到外面来使用
+    $.extend({
+        isArrayLike: function (obj) {
+            var length = !!obj && "length" in obj && obj.length,
+                type = jQuery.type(obj);
+
+            if (type === "function" || jQuery.isWindow(obj)) {
+                return false;
+            }
+
+            return type === "array" || length === 0 ||
+                typeof length === "number" && length > 0 && ( length - 1 ) in obj;
+        }
+    });
+
+
+    var obj = {name: "xx", sex: "female", length: "xx"};
+    console.log("length" in obj && obj.length);//第一个是true,所以返回第二个值，第二个值就是xx
+    console.log("结果是=>" + "length" in obj && obj.length);//第一个是变成"结果是=>length in obj"显然直接是false(和+在一起，变成了字符串连接)，所以&&操作符就直接返回false
+
+    console.log("结果是：" + ("length" in obj && obj.length));//把后面的结果先计算，打上括号就能够得到正确的结果！
+    console.log($.isArrayLike(obj));//返回false，因为length不是0，也不是number类型
+
+    var obj = {name: "xx", sex: "female", length: "2"}
+    var obj1 = {name: "xx", sex: "female", length: 0}
+    console.log(typeof("length" in obj && obj.length));//虽然在对象obj里面，length没有打上双引号，但是“length” in obj是正确的，同时obj.length是string类型
+    console.log($.isArrayLike(obj1));//因为obj1的length是0返回true
+    console.log($.isArrayLike(obj));//因为obj的length是string类型，直接返回false
+</script>
+</body>
+</html>

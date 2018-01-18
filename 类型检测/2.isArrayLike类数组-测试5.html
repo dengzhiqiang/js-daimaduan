@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.isArrayLike类数组</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+<script>
+    // 由于isArrayLike是私有函数，所以暂时先放到外面来使用
+    $.extend({
+        isArrayLike: function (obj) {
+            var length = !!obj && "length" in obj && obj.length,
+                type = jQuery.type(obj);
+
+            if (type === "function" || jQuery.isWindow(obj)) {
+                return false;
+            }
+
+            return type === "array" || length === 0 ||
+                typeof length === "number" && length > 0 && ( length - 1 ) in obj;
+        }
+    });
+
+
+</script>
+<script>
+    //如果是Element元素，也就是nodeType===1，而且含有length属性
+    console.log("结果是1：" + document.getElementById("div1").length);
+    //    是undefined, 也就是没有length属性
+    document.getElementById("xx"); // 返回的nodeType是1，但是没有length属性
+    document.getElementsByTagName("div") // 的集合有length属性，但是没有nodeType,返回的是htmlCollection集合
+</script>
+
+</body>
+</html>

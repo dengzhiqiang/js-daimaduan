@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2.isArrayLike类数组</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        body {
+            background: #000;
+            height: 1000px;
+        }
+    </style>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+
+<script>
+    // 由于isArrayLike是私有函数，所以暂时先放到外面来使用
+    $.extend({
+        isArrayLike: function (obj) {
+            var length = !!obj && "length" in obj && obj.length,
+                type = jQuery.type(obj);
+
+            if (type === "function" || jQuery.isWindow(obj)) {
+                return false;
+            }
+
+            return type === "array" || length === 0 ||
+                typeof length === "number" && length > 0 && ( length - 1 ) in obj;
+        }
+    });
+
+
+</script>
+<script>
+    var obj = {name: "qin", sex: "female", length: 5};
+    console.log($.isArrayLike(obj));//返回false，因为，虽然length是number类型，同时length>0,但是(length-1) in obj返回false,var obj={name:"qin",sex:"female",n:"xx",m:"xx",y:"xx",length:5}也就是一样的道理。
+
+
+    var obj = {0: "qin", 1: "female", 2: "xx", 3: "xx", 4: "xx", length: 5};//返回结果就是true，因为(4-1) in obj是返回true的
+    console.log($.isArrayLike(obj));
+</script>
+
+</body>
+</html>
